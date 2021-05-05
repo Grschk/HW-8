@@ -74,13 +74,8 @@ public class MyLinkedList<E> {
     }
 
     public void clear(){
-        for (Element<E> x = first; x != null;) {
-            Element<E> tmpNext = x.next;
-            x.next=null;
-            x.prev=null;
-            x.value=null;
-            x = tmpNext;
-        }
+        first = null;
+        last = null;
         sizeList = 0;
     }
 

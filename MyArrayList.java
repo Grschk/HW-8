@@ -30,15 +30,10 @@ public class MyArrayList <E>{
     }
 
 
-    public E[] remove(int index){
-        Object[] newArr = new Object[sizeArr-1];
-        int j=0;
-        for (int i=0; i < sizeArr; i++){
-            if (i != index) {
-                newArr[j++] =(E) array[i];
-            }
-        }
-        return array = (E[]) newArr;
+    public void remove(int index) {
+        if(index > array.length) throw new IndexOutOfBoundsException("Index out of bounds");
+        array[index] = null;
+        sizeArr --;
     }
 
     public void clear (){
@@ -50,17 +45,10 @@ public class MyArrayList <E>{
         return sizeArr;
     }
 
-    public E[] get(int index){
-        Object[] newArr = new Object[1];
-        for (int i=0; i < sizeArr; i++){
-            if (i == index) {
-                newArr[1] = (E) array[i];
-            }
-        }
-        return array = (E[]) newArr;
+    public E get(int index) {
+        if(index > array.length) throw new IndexOutOfBoundsException("Out of bounds");
+        return (E) (array[index]);
     }
-
-
     public static void main(String[] args) {
         MyArrayList<Integer> myArrList = new MyArrayList<>();
         List<Integer> arrList = new ArrayList<>();
