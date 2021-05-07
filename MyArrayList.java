@@ -31,9 +31,11 @@ public class MyArrayList <E>{
 
 
     public void remove(int index) {
-        if(index > array.length) throw new IndexOutOfBoundsException("Index out of bounds");
-        array[index] = null;
-        sizeArr --;
+        Object[] newArray = new Object[array.length - 1];
+        System.arraycopy(array, 0, newArray, 0, index);
+        System.arraycopy(array, index + 1, newArray, index, array.length - index - 1);
+        array = (E[]) newArray;
+        sizeArr--;
     }
 
     public void clear (){
@@ -54,9 +56,12 @@ public class MyArrayList <E>{
         List<Integer> arrList = new ArrayList<>();
         myArrList.add(1);
         myArrList.add(3);
+        System.out.println(myArrList.size());
         myArrList.remove(0);
+        System.out.println(myArrList.size());
         myArrList.clear();
         myArrList.get(0);
+        System.out.println(myArrList.size());
     }
 
 }

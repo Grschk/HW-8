@@ -13,10 +13,20 @@ public class MyHashMap<K,V> {
     }
 
     private static class HashNode<K,V>{
+
         K key;
         V value;
         int hash;
         HashNode<K,V> next;
+        public K getKey() {
+            return key;
+        }
+        public V getValue() {
+            return value;
+        }
+        public HashNode<K, V> getNext() {
+            return next;
+        }
 
         public HashNode(K key, V value) {
             this.key = key;
@@ -102,32 +112,34 @@ public class MyHashMap<K,V> {
         return sizeHashMap;
     }
 
-    public HashNode<K,V> get(K key) {
-        int index = indexOf(key);
-        HashNode<K,V> x, resultGet = null;
-        if (hashArray[index].next == null) resultGet = hashArray[index];
-        else {
-            x = hashArray[index].next;
-            do{
-                if (Objects.equals(x.key,key)) resultGet = x;
-            }while ((x = x.next) != null);
+
+    public V get(K key) {
+        int indexHashGet = indexOf(key);
+
+        HashNode<K, V> hashNode = hashArray[indexHashGet];
+        while (hashNode != null) {
+            if (hashNode.getKey().equals(key)) {
+                return hashNode.getValue();
+            }
+            hashNode = hashNode.getNext();
         }
-        return resultGet;
+        return null;
     }
+
 
     public static void main(String[] args) {
         MyHashMap<Integer, Integer> myMap = new MyHashMap<>();
-        myMap.put(1,1);
+        myMap.put(1,145);
         myMap.put(2,2);
         myMap.put(3,2);
-        myMap.put(2,3);
+        myMap.put(2,232);
         myMap.put(3,3);
         myMap.put(4,4);
-        myMap.put(10,5);
+        myMap.put(4,5);
         System.out.println(myMap.size());
-        System.out.println(myMap.get(10));
+        System.out.println("Value of key 2 is "+myMap.get(2));
         myMap.remove(3);
-        System.out.println(myMap.get(2));
+        System.out.println("Value of key 1 is "+myMap.get(1));
         System.out.println(myMap.size());
         myMap.clear();
         System.out.println(myMap.size());
